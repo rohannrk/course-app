@@ -16,7 +16,6 @@ function Appbar() {
         function callback1(res) {
             res.json().then(callback2)
         }
-        console.log("token - " + localStorage.getItem("token"));
         fetch("http://localhost:3000/admin/me", {
             method: "GET",
             headers: {
