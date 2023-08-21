@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Signin from "./Signin.jsx";
-import Signup from "./Signup.jsx";
-import Appbar from "./Appbar.jsx";
-import AddCourse from "./AddCourse.jsx";
-import Courses from "./Courses";
-import Course from "./Course";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup.jsx";
+import Appbar from "./components/Appbar.jsx";
+import AddCourse from "./components/AddCourse.jsx";
+import Courses from "./components/Courses";
+import Course from "./components/Course";
 import { useEffect, useState } from 'react';
 import axios from "axios";
 
