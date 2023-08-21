@@ -16,6 +16,7 @@ function Appbar() {
         function callback1(res) {
             res.json().then(callback2)
         }
+        console.log("token - " + localStorage.getItem("token"));
         fetch("http://localhost:3000/admin/me", {
             method: "GET",
             headers: {
@@ -28,17 +29,31 @@ function Appbar() {
         return <div style={{
             display: "flex",
             justifyContent: "space-between",
-            padding: 4
+            padding: 4,
+            zIndex: 1
         }}>
-            <div>
+            <div style={{marginLeft: 10}}>
                 <Typography variant={"h6"}>Coursera</Typography>
             </div>
     
             <div style={{display: "flex"}}>
-                <div>
-                    {userEmail}
-                </div>
+                <div style={{marginRight: 10, display: "flex"}}>
                 <div style={{marginRight: 10}}>
+                        <Button
+                            onClick={() => {
+                                navigate("/addcourse")
+                            }}
+                        >Add course</Button>
+                    </div>
+
+                    <div style={{marginRight: 10}}>
+                        <Button
+                            onClick={() => {
+                                navigate("/courses")
+                            }}
+                        >Courses</Button>
+                    </div>
+
                     <Button
                         variant={"contained"}
                         onClick={() => {
@@ -53,9 +68,10 @@ function Appbar() {
         return <div style={{
             display: "flex",
             justifyContent: "space-between",
-            padding: 4
+            padding: 4,
+            zIndex: 1
         }}>
-            <div>
+            <div style={{marginLeft: 10}}>
                 <Typography variant={"h6"}>Coursera</Typography>
             </div>
     
