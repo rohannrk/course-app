@@ -2,27 +2,27 @@ import {Typography} from "@mui/material";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
+import { BASE_URL } from "../config.js";
+import axios from "axios";
 
 function Appbar() {
     const navigate = useNavigate()
     const [userEmail, setUserEmail] = useState(null);
 
-    useEffect(() => {
-        function callback2(data) {
-            if (data.username) {
-                setUserEmail(data.username)
-            }
-        }
-        function callback1(res) {
-            res.json().then(callback2)
-        }
-        console.log("token - " + localStorage.getItem("token"));
-        fetch("http://localhost:3000/admin/me", {
-            method: "GET",
+    const init = async() => {
+        const response = await axios.get(`${BASE_URL}/admin/me`, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }
-        }).then(callback1)
+        })
+
+        if (response.data.username) {
+            setUserEmail(response.data.username)
+        }
+    };
+
+    useEffect(() => {
+       init();
     }, []);
 
     if (userEmail) {
@@ -32,7 +32,9 @@ function Appbar() {
             padding: 4,
             zIndex: 1
         }}>
-            <div style={{marginLeft: 10}}>
+            <div style={{marginLeft: 10, cursor: "pointer"}} onClick={() => {
+                navigate("/")
+            }}>
                 <Typography variant={"h6"}>Coursera</Typography>
             </div>
     
@@ -71,7 +73,9 @@ function Appbar() {
             padding: 4,
             zIndex: 1
         }}>
-            <div style={{marginLeft: 10}}>
+            <div style={{marginLeft: 10, cursor: "pointer"}} onClick={() => {
+                navigate("/")
+            }}>
                 <Typography variant={"h6"}>Coursera</Typography>
             </div>
     

@@ -3,13 +3,15 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import { Typography, TextField, Button } from "@mui/material";
 import axios from "axios";
+import {Loading} from "./Loading";
+import { BASE_URL } from "../config.js";
 
 function Course() {
     let { courseId } = useParams();
     const [course, setCourse] = useState(null);
     
     useEffect(() => {
-        axios.get("http://localhost:3000/admin/course/" + courseId, {
+        axios.get(`${BASE_URL}/admin/course/${courseId}`, {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
@@ -20,9 +22,7 @@ function Course() {
     }, []);
 
     if (!course) {
-        return <div style={{height: "100vh", justifyContent: "center", flexDirection: "column"}}>
-            Loading....
-        </div>
+        return <Loading />
     }
 
     return <div>
@@ -106,7 +106,7 @@ function UpdateCard({course, setCourse}) {
             <Button
                 variant="contained"
                 onClick={async () => {
-                    axios.put("http://localhost:3000/admin/courses/" + course._id, {
+                    axios.put(`${BASE_URL}/admin/courses/` + course._id, {
                         title: title,
                         description: description,
                         imageLink: image,
